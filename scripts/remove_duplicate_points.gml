@@ -1,16 +1,16 @@
 // takes array replaces duplicates with NIL(-1) macro
 var l=len(argument0),
 t=0,
-nil= line(point(NIL,NIL),point(NIL,NIL)),
-arr = NIL; 
+nil= point(false,false),
+arr = false; 
 
 for(i=0; i<l; ++i) {
 
-    cl = argument0[i]   //cl : current line
+    cp = argument0[i]   //cp : current point
     for(j=i; j<l; ++j) {
         
-        ol = argument0[j] //ol : other line
-        if i!=j  and is_same_line(cl, ol) and ol[0]!=NIL
+        op = argument0[j] //op : other point
+        if i!=j  and is_same_point(cp, op) and op[0]!=false
             {
                 argument0[j] = nil;
             }
@@ -18,7 +18,7 @@ for(i=0; i<l; ++i) {
 }
 
 for(i=0; i<l; ++i) {
-    if !is_same_line(argument0[i],nil) {
+    if !is_same_point(argument0[i],nil) {
         arr[t] = argument0[i];
         t++;
     }

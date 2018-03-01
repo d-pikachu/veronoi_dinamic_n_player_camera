@@ -21,17 +21,28 @@
       <script>scripts\line.gml</script>
       <script>scripts\draw_point_pika.gml</script>
       <script>scripts\draw_point_square.gml</script>
+      <script>scripts\draw_line_ends_square.gml</script>
+      <script>scripts\draw_line_ends_circle.gml</script>
     </scripts>
     <script>scripts\len.gml</script>
     <script>scripts\cyc.gml</script>
     <script>scripts\is_between.gml</script>
     <script>scripts\remove_duplicate_lines.gml</script>
-    <script>scripts\is_same_line.gml</script>
+    <script>scripts\remove_duplicate_points.gml</script>
     <script>scripts\is_same_point.gml</script>
     <scripts name="uggh math">
       <script>scripts\normal.gml</script>
-      <script>scripts\line_middle.gml</script>
+      <script>scripts\normal_new.gml</script>
+      <script>scripts\line_middle_point.gml</script>
     </scripts>
+    <script>scripts\point_in_rect.gml</script>
+    <scripts name="LINE">
+      <script>scripts\line_length.gml</script>
+      <script>scripts\is_same_line.gml</script>
+      <script>scripts\is_line_end.gml</script>
+    </scripts>
+    <script>scripts\line_intersection.gml</script>
+    <script>scripts\little_shorter.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="nodes">

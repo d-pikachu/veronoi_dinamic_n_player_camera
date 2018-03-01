@@ -53,6 +53,10 @@ for(i=0;  i&lt;instance_number(o_node); ++i) {
             <kind>1</kind>
             <string>///temp tests
 counter = 0
+
+split_dis = (W+H)/4
+
+
 </string>
           </argument>
         </arguments>
@@ -76,7 +80,8 @@ counter = 0
           <argument>
             <kind>1</kind>
             <string>///quit
-if keyboard_check(vk_escape) game_end()
+if keyboard_check(vk_escape) or keyboard_check(vk_end) or keyboard_check(vk_enter)
+game_end()
 </string>
           </argument>
         </arguments>
@@ -97,9 +102,10 @@ if keyboard_check(vk_escape) game_end()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///lines between nodes
+            <string>///GETTING LINES
 
-node_line = -1
+//node betweens
+node_line = NIL
 t = 0
 for(i=0; i&lt;len(nodes); ++i) {
     for(j=0; j&lt;len(nodes); ++j) {
@@ -112,7 +118,9 @@ for(i=0; i&lt;len(nodes); ++i) {
     }
 }
 
-//node_line = remove_duplicate_lines(node_line)
+node_line = remove_duplicate_lines(node_line)
+
+
 </string>
           </argument>
         </arguments>
@@ -133,7 +141,116 @@ for(i=0; i&lt;len(nodes); ++i) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///lines between nodes++
+            <string>///FILTERED LINES
+
+outer_line = NIL
+t = 0
+for(i=0; i&lt;len(node_line); ++i) {
+    flag = true
+    for(j=0; j&lt;len(node_line); ++j) {
+        if i!=j {
+            
+            //t_cp = line_intersection(node_line[i], node_line[j])
+            t_cp = line_intersection(little_shorter(node_line[i], 1),
+             little_shorter(node_line[j], 1));
+            
+            if t_cp[0] != false {
+                flag = false
+                break;
+            }
+        }
+    }
+    if flag {
+        outer_line[t] = node_line[i];
+        t++;
+    }
+}
+
+//node_line = outer_line
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///NORMALS
+node_normal = NIL
+t = 0
+for(j=0; j&lt;len(node_line); ++j) {
+    node_normal[t] = normal_new(node_line[j])
+    t++;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///INTERSECTIONS
+sect_point = NIL
+t = 0
+for(i=0; i&lt;len(node_line); ++i) {
+    for(j=0; j&lt;len(node_line); ++j) {
+        if i!=j {
+            t_p = line_intersection(node_normal[i], node_normal[j])
+            if t_p[X]!=false {
+                sect_point[t] = t_p;
+                t++;
+            }
+        }
+    }
+}
+
+sect_point = remove_duplicate_points(sect_point)
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///(DISABLED) lines between nodes++ 
 /*
 node_line = -1
 t = 0
@@ -218,6 +335,76 @@ counter = cyc(counter,5)
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///SIBLING
+node_bros = NIL
+t = 0
+for(i=0; i&lt;len(nodes); ++i) {
+    c_b = NIL //current bros
+    l_t = 0 //local indexer
+    for(j=0; j&lt;len(node_line); ++j) {
+        if is_line_end(point(nodes[i].x, nodes[i].y), node_line[j]) {
+            c_b[l_t] = j;
+            l_t++;
+        }
+    }
+    node_bros[t] = c_b;
+    t++;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///SIBLING OUTER
+node_bros_outer = NIL
+t = 0
+for(i=0; i&lt;len(nodes); ++i) {
+    c_b = NIL //current bros
+    l_t = 0 //local indexer
+    for(j=0; j&lt;len(outer_line); ++j) {
+        if is_line_end(point(nodes[i].x, nodes[i].y), outer_line[j]) {
+            c_b[l_t] = j;
+            l_t++;
+        }
+    }
+    node_bros_outer[t] = c_b;
+    t++;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -239,7 +426,12 @@ counter = cyc(counter,5)
             <string>///debug
 debug[0] = "node_count - " + string(len(nodes));
 debug[1] = "line_count - " + string(len(node_line));
+//if node_line!=NIL 
 debug[2] = "line - " + string(node_line[0]);
+debug[3] = "sect_count - " + string(len(sect_point));
+debug[4] = "outer_line - " + string(len(outer_line));
+debug[5] = "node_bros - " + string(node_bros);
+debug[6] = "node_bros_out - " + string(node_bros_outer);
 
 for(i=0; i&lt;len(debug); ++i) {
     draw_text(10, i*15+10, debug[i]);
@@ -266,11 +458,32 @@ for(i=0; i&lt;len(debug); ++i) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///DRAWING lines between nodes
+            <string>///DRAWING LINES
+//if node_line!=NIL
 
+/*
 for(i=0;  i&lt;len(node_line); ++i) {
-   draw_line_pika(node_line[i]);
+    
+    //if keyboard_check(ord(string(i)))
+    draw_line_pika(node_line[i])
+    
+    //distance constraint
+   // if line_length(node_line[i]) &gt; split_dis {
+        //draw_line_pika(node_normal[i]) 
+        //draw_line_ends_square(node_normal[i])
+   //}
 }
+
+*/
+
+//Outer lines
+/*
+for(i=0 ; i&lt;len(outer_line); ++i) {
+    draw_line_pika(outer_line[i]);
+}
+*/
+
+
 </string>
           </argument>
         </arguments>
@@ -291,9 +504,83 @@ for(i=0;  i&lt;len(node_line); ++i) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///normal test
-draw_point_pika(line_middle(node_line[0]))
-normal(node_line[0])
+            <string>///NODE BROS TEST
+
+for(i=0;  i&lt;len(nodes); ++i) {
+    
+    var c_b = node_bros[i];
+    
+    if keyboard_check(ord(string(i+1))) {
+        for(j=0; j&lt;len(c_b); ++j) {
+            if c_b[j]&lt;len(node_line)
+                draw_line_pika(node_line[c_b[j]])
+                draw_line_pika(node_normal[c_b[j]])
+        }
+        draw_circle(nodes[i].x, nodes[i].y, 17, true)
+    }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///[D]NODE BROS OUTER
+/*
+for(i=0;  i&lt;len(nodes); ++i) {
+    
+    var c_b = node_bros_outer[i];
+    
+    if keyboard_check(ord(string(i+1))) {
+        for(j=0; j&lt;len(c_b); ++j) {
+            if c_b[j]&lt;len(outer_line)
+                draw_line_pika(outer_line[c_b[j]])
+        }
+        draw_circle(nodes[i].x, nodes[i].y, 17, true)
+    }
+}
+*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DRAW SECTS
+
+for(i=0; i&lt;len(sect_point); ++i) {
+    draw_point_square(sect_point[i])
+}
+
 </string>
           </argument>
         </arguments>

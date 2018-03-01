@@ -5,16 +5,8 @@ right = keyboard_check(argument1)
 down = keyboard_check(argument2)
 left = keyboard_check(argument3)
 
-//adjusted for arrow keys
-/*if argument0 == vk_up {
-    up = argument0
-    right = argument1
-    down = argument2
-    left = argument3
-}*/
-
 if right == left {
-    spdh = gradually(spdh , 0 , 1)
+    spdh = gradually(spdh , 0 , rate/2)
 }
 else {
     if right {
@@ -26,7 +18,7 @@ else {
 }
 
 if up == down {
-    spdv = gradually(spdv , 0 , 1)
+    spdv = gradually(spdv , 0 , rate/2)
 }
 else {
     if down {
