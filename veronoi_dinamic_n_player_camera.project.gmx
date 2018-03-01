@@ -17,6 +17,20 @@
     <script>scripts\gradually.gml</script>
     <scripts name="geo">
       <script>scripts\point.gml</script>
+      <script>scripts\draw_line_pika.gml</script>
+      <script>scripts\line.gml</script>
+      <script>scripts\draw_point_pika.gml</script>
+      <script>scripts\draw_point_square.gml</script>
+    </scripts>
+    <script>scripts\len.gml</script>
+    <script>scripts\cyc.gml</script>
+    <script>scripts\is_between.gml</script>
+    <script>scripts\remove_duplicate_lines.gml</script>
+    <script>scripts\is_same_line.gml</script>
+    <script>scripts\is_same_point.gml</script>
+    <scripts name="uggh math">
+      <script>scripts\normal.gml</script>
+      <script>scripts\line_middle.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -25,13 +39,14 @@
       <object>objects\A</object>
       <object>objects\B</object>
       <object>objects\C</object>
+      <object>objects\D</object>
     </objects>
     <object>objects\camera</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
   </rooms>
-  <constants number="19">
+  <constants number="20">
     <constant name="W">800</constant>
     <constant name="H">600</constant>
     <constant name="none">noone</constant>
@@ -51,6 +66,7 @@
     <constant name="LEFT">3</constant>
     <constant name="ABOVE">0</constant>
     <constant name="BELOW">1</constant>
+    <constant name="NIL">-1</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
