@@ -191,7 +191,7 @@ for(i=0; i&lt;len(node_line); ++i) {
 node_normal = NIL
 t = 0
 for(j=0; j&lt;len(node_line); ++j) {
-    node_normal[t] = normal_new(node_line[j])
+    node_normal[t] = normal(node_line[j])
     t++;
 }
 </string>
@@ -409,9 +409,9 @@ for(i=0; i&lt;len(nodes); ++i) {
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
+        <id>611</id>
+        <kind>6</kind>
+        <userelative>-1</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
         <exetype>2</exetype>
@@ -423,25 +423,56 @@ for(i=0; i&lt;len(nodes); ++i) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///debug
-debug[0] = "node_count - " + string(len(nodes));
-debug[1] = "line_count - " + string(len(node_line));
-//if node_line!=NIL 
-debug[2] = "line - " + string(node_line[0]);
-debug[3] = "sect_count - " + string(len(sect_point));
-debug[4] = "outer_line - " + string(len(outer_line));
-debug[5] = "node_bros - " + string(node_bros);
-debug[6] = "node_bros_out - " + string(node_bros_outer);
-
-for(i=0; i&lt;len(debug); ++i) {
-    draw_text(10, i*15+10, debug[i]);
-}
-</string>
+            <string>draw</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>612</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>-1</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_if_variable</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>draw</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>422</id>
+        <kind>1</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -461,7 +492,7 @@ for(i=0; i&lt;len(debug); ++i) {
             <string>///DRAWING LINES
 //if node_line!=NIL
 
-/*
+
 for(i=0;  i&lt;len(node_line); ++i) {
     
     //if keyboard_check(ord(string(i)))
@@ -469,12 +500,11 @@ for(i=0;  i&lt;len(node_line); ++i) {
     
     //distance constraint
    // if line_length(node_line[i]) &gt; split_dis {
-        //draw_line_pika(node_normal[i]) 
-        //draw_line_ends_square(node_normal[i])
+        draw_line_pika(node_normal[i]) 
+        draw_line_ends_square(node_normal[i])
    //}
 }
 
-*/
 
 //Outer lines
 /*
@@ -504,8 +534,8 @@ for(i=0 ; i&lt;len(outer_line); ++i) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///NODE BROS TEST
-
+            <string>///NODE BROS
+/*
 for(i=0;  i&lt;len(nodes); ++i) {
     
     var c_b = node_bros[i];
@@ -519,7 +549,7 @@ for(i=0;  i&lt;len(nodes); ++i) {
         draw_circle(nodes[i].x, nodes[i].y, 17, true)
     }
 }
-
+*/
 </string>
           </argument>
         </arguments>
@@ -551,7 +581,9 @@ for(i=0;  i&lt;len(nodes); ++i) {
             if c_b[j]&lt;len(outer_line)
                 draw_line_pika(outer_line[c_b[j]])
         }
-        draw_circle(nodes[i].x, nodes[i].y, 17, true)
+        draw_circle(nodes[i].x, nodes[i].y, 18, true)
+        if len(c_b)==3
+        draw_circle(nodes[i].x, nodes[i].y, 22, true)
     }
 }
 */
@@ -578,12 +610,384 @@ for(i=0;  i&lt;len(nodes); ++i) {
             <string>///DRAW SECTS
 
 for(i=0; i&lt;len(sect_point); ++i) {
-    draw_point_square(sect_point[i])
+    //draw_point_square(sect_point[i])
+    draw_point_pika(sect_point[i])
 }
 
 </string>
           </argument>
         </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///EURika
+/*
+for(i=0;  i&lt;len(nodes); ++i) {
+    
+    var c_b = node_bros[i];
+    
+    if keyboard_check(ord(string(i+1))) {
+        pnt = NIL
+        t = 0
+        for(j=0; j&lt;len(c_b); ++j) {
+            for(k=0; k&lt;len(c_b); ++k) {
+                if i!=j {
+                      aa = node_normal[c_b[j]]
+                      bb = node_normal[c_b[k]]
+                      pp = line_intersection(aa,bb)
+                      
+                      if pp[0]!=false {
+                        pnt[t] = pp
+                        t++;
+                        draw_point_square(pp)
+                      }
+                  }
+            }
+        }
+        draw_circle(nodes[i].x, nodes[i].y, 17, true)
+    }
+}
+*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>424</id>
+        <kind>2</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///debug
+debug[0] = "node_count - " + string(len(nodes));
+debug[1] = "line_count - " + string(len(node_line));
+//if node_line!=NIL 
+debug[2] = "line - " + string(node_line[0]);
+debug[3] = "sect_count - " + string(len(sect_point));
+debug[4] = "outer_line - " + string(len(outer_line));
+debug[5] = "node_bros - " + string(node_bros);
+debug[6] = "node_bros_out - " + string(node_bros_outer);
+//debug[6] = "pnt - " + string(pnt);
+
+for(i=0; i&lt;len(debug); ++i) {
+    draw_text(10, i*15+10, debug[i]);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>611</id>
+        <kind>6</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>1</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>612</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>-1</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_if_variable</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>draw</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>422</id>
+        <kind>1</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DRAWING LINES
+//if node_line!=NIL
+
+
+for(i=0;  i&lt;len(node_line); ++i) {
+    
+    //if keyboard_check(ord(string(i)))
+    draw_line_pika(node_line[i])
+    
+    //distance constraint
+   // if line_length(node_line[i]) &gt; split_dis {
+        draw_line_pika(node_normal[i]) 
+        draw_line_ends_square(node_normal[i])
+   //}
+}
+
+
+//Outer lines
+/*
+for(i=0 ; i&lt;len(outer_line); ++i) {
+    draw_line_pika(outer_line[i]);
+}
+*/
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///NODE BROS
+/*
+for(i=0;  i&lt;len(nodes); ++i) {
+    
+    var c_b = node_bros[i];
+    
+    if keyboard_check(ord(string(i+1))) {
+        for(j=0; j&lt;len(c_b); ++j) {
+            if c_b[j]&lt;len(node_line)
+                draw_line_pika(node_line[c_b[j]])
+                draw_line_pika(node_normal[c_b[j]])
+        }
+        draw_circle(nodes[i].x, nodes[i].y, 17, true)
+    }
+}
+*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///[D]NODE BROS OUTER
+/*
+for(i=0;  i&lt;len(nodes); ++i) {
+    
+    var c_b = node_bros_outer[i];
+    
+    if keyboard_check(ord(string(i+1))) {
+        for(j=0; j&lt;len(c_b); ++j) {
+            if c_b[j]&lt;len(outer_line)
+                draw_line_pika(outer_line[c_b[j]])
+        }
+        draw_circle(nodes[i].x, nodes[i].y, 18, true)
+        if len(c_b)==3
+        draw_circle(nodes[i].x, nodes[i].y, 22, true)
+    }
+}
+*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DRAW SECTS
+
+for(i=0; i&lt;len(sect_point); ++i) {
+    //draw_point_square(sect_point[i])
+    draw_point_pika(sect_point[i])
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///EURika
+/*
+for(i=0;  i&lt;len(nodes); ++i) {
+    
+    var c_b = node_bros[i];
+    
+    if keyboard_check(ord(string(i+1))) {
+        pnt = NIL
+        t = 0
+        for(j=0; j&lt;len(c_b); ++j) {
+            for(k=0; k&lt;len(c_b); ++k) {
+                if i!=j {
+                      aa = node_normal[c_b[j]]
+                      bb = node_normal[c_b[k]]
+                      pp = line_intersection(aa,bb)
+                      
+                      if pp[0]!=false {
+                        pnt[t] = pp
+                        t++;
+                        draw_point_square(pp)
+                      }
+                  }
+            }
+        }
+        draw_circle(nodes[i].x, nodes[i].y, 17, true)
+    }
+}
+*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>424</id>
+        <kind>2</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
   </events>

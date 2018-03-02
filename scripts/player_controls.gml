@@ -32,5 +32,7 @@ else {
 x += spdh
 y += spdv
 
-x = clamp(x,0,W)
-y = clamp(y,0,H)
+//x = clamp(x,0,W)
+//y = clamp(y,0,H)
+x = clamp(x,0,room_width)
+y = clamp(y,0,room_height)

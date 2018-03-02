@@ -1,6 +1,5 @@
-
-//var m = argument0[Y]/argument0[X];
-
+//argument 0 : line
+//slope
 var rise = argument0[Y2]-argument0[Y1];
 var run = argument0[X2]-argument0[X1]
 if run==0 run=0.0001
@@ -12,27 +11,27 @@ var p_mid = line_middle_point(argument0)
 
 // y = m(x-x1) + y1
 // x = ((y-y1)/m)+x1
-var p;
-p_[0] = point(0 , (m*(0 - p_mid[X]))+ p_mid[Y])
-p_[1] = point(W , (m*(W - p_mid[X]))+ p_mid[Y])
-p_[2] = point(((0-p_mid[Y])/m)+ p_mid[X], 0)
-p_[3] = point(((H-p_mid[Y])/m)+ p_mid[X], H)
+var p=-1;
 
-var l_t=0, res;
+//ww = W
+//hh = H
+ww = room_width
+hh = room_height
+p_[0] = point(0 , (m*(0 - p_mid[X]))+ p_mid[Y])
+p_[1] = point(ww , (m*(ww - p_mid[X]))+ p_mid[Y])
+p_[2] = point(((0-p_mid[Y])/m)+ p_mid[X], 0)
+p_[3] = point(((hh-p_mid[Y])/m)+ p_mid[X], hh)
+
+
+var l_t=0, //local index
+e_p=-1; //end points
 for(i=0 ; i<=3 ; ++i) {
-    pp_ = p_[i]
-    if is_between(pp_[X],0,W) and is_between(pp_[Y],0,H) {
-        res[l_t] = pp_
+    c_p = p_[i] //current_point
+    if is_between(c_p[X],0,ww) and is_between(c_p[Y],0,hh) {
+        e_p[l_t] = c_p
         l_t++;
     }
 }
 
-//for(i=0; i<len(res); ++i){
-lin = line(res[0], res[1])
-//draw_line_pika(lin)
 
-//draw_point_square(res[0])
-//draw_point_square(res[1])
-//return lin
-//draw_point_pika(res[i])
-//}
+return line(e_p[0], e_p[1])

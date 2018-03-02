@@ -27,22 +27,23 @@
     <script>scripts\len.gml</script>
     <script>scripts\cyc.gml</script>
     <script>scripts\is_between.gml</script>
-    <script>scripts\remove_duplicate_lines.gml</script>
-    <script>scripts\remove_duplicate_points.gml</script>
     <script>scripts\is_same_point.gml</script>
     <scripts name="uggh math">
       <script>scripts\normal.gml</script>
-      <script>scripts\normal_new.gml</script>
       <script>scripts\line_middle_point.gml</script>
+      <script>scripts\point_in_rect.gml</script>
     </scripts>
-    <script>scripts\point_in_rect.gml</script>
     <scripts name="LINE">
       <script>scripts\line_length.gml</script>
+      <script>scripts\little_shorter.gml</script>
+      <script>scripts\line_intersection.gml</script>
       <script>scripts\is_same_line.gml</script>
       <script>scripts\is_line_end.gml</script>
     </scripts>
-    <script>scripts\line_intersection.gml</script>
-    <script>scripts\little_shorter.gml</script>
+    <scripts name="Filter">
+      <script>scripts\remove_duplicate_lines.gml</script>
+      <script>scripts\remove_duplicate_points.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
     <objects name="nodes">
@@ -55,6 +56,7 @@
     <object>objects\camera</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_main_big</room>
     <room>rooms\rm_main</room>
   </rooms>
   <constants number="20">
