@@ -56,8 +56,8 @@
     <object>objects\camera</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_main</room>
     <room>rooms\rm_main_big</room>
+    <room>rooms\rm_main</room>
   </rooms>
   <constants number="20">
     <constant name="W">800</constant>
